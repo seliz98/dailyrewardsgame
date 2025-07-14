@@ -1,0 +1,52 @@
+/* Full height layout */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #fffaf0;
+}
+
+/* Center everything in the container */
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertical centering */
+  align-items: center;     /* horizontal centering */
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Button layout */
+.action_btn {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+button.submit {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button.cancel {
+  background-color: #f44336;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Result text */
+#saved {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #333;
+}
