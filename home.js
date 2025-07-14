@@ -1,7 +1,7 @@
 const allIngredients = ["flour", "sugar", "milk", "eggs", "strawberries"];
 let collected = JSON.parse(localStorage.getItem("ingredients")) || [];
 
-function myFunction() {
+function getIngredients() {
   const today = new Date().toDateString();
   const lastClaim = localStorage.getItem("lastClaim");
 
@@ -29,7 +29,7 @@ function myFunction() {
   localStorage.setItem("lastClaim", today);
 }
 
-function myFunction2() {
+function rewardsHistory() {
   if (collected.length === 0) {
     document.getElementById("saved").innerText =
       "🚫 You haven't collected any ingredients yet!";

@@ -26,7 +26,7 @@ html, body {
   margin-top: 20px;
 }
 
-button.submit {
+button.getIngredients {
   background-color: #4caf50;
   color: white;
   padding: 10px 20px;
@@ -35,7 +35,7 @@ button.submit {
   cursor: pointer;
 }
 
-button.cancel {
+button.rewardsHistory {
   background-color: #f44336;
   color: white;
   padding: 10px 20px;
