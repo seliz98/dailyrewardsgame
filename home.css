@@ -44,6 +44,24 @@ button.rewardsHistory {
   cursor: pointer;
 }
 
+button.resetProgress {
+  background-color: #f44336;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button.checkCompletedRecipes {
+  background-color: #f44336;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
 /* Result text */
 #saved {
   margin-top: 20px;
