@@ -5,10 +5,9 @@ const recipes = {
   "Strawberry Cake": ["flour", "sugar", "milk", "eggs", "strawberries"],
   // Add more recipes here
 };
+let collected = JSON.parse(localStorage.getItem("ingredients")) || [];
 let completedRecipes =
   JSON.parse(localStorage.getItem("completedRecipes")) || [];
-
-let collected = JSON.parse(localStorage.getItem("ingredients")) || [];
 
 function getIngredients() {
   const now = Date.now();
@@ -19,38 +18,46 @@ function getIngredients() {
       "✅ Already claimed your ingredient! Wait until tomorrow.";
     return;
   }
-  /* if (now - lastClaim < twentyFourHours) {
-    document.getElementById("saved").innerText =
-      "✅ Already claimed your ingredient! Wait until tomorrow.";
-    return;
-  }*/
 
   const newIngredient =
     allIngredients[Math.floor(Math.random() * allIngredients.length)];
 
+  let message = "";
+
   if (!collected.includes(newIngredient)) {
     collected.push(newIngredient);
     localStorage.setItem("ingredients", JSON.stringify(collected));
-    document.getElementById(
-      "saved"
-    ).innerText = `🎉 You got: ${newIngredient}!`;
+    message += `🎉 You got: ${newIngredient}!\n`;
   } else {
-    document.getElementById(
-      "saved"
-    ).innerText = `😅 You got a duplicate: ${newIngredient}`;
+    message += `😅 You got a duplicate: ${newIngredient}\n`;
   }
 
   localStorage.setItem("lastClaimTime", now);
-  document.getElementById("saved").innerText +=
-    "\n🧺 Your ingredients: " + collected.join(", ");
+
+  message += `🧺 Your ingredients: ${collected.join(", ")}\n`;
+
+  // Save message to element now
+  document.getElementById("saved").innerText = message;
+
   checkCompletedRecipes();
+
   updateCountdown();
 }
 
 function checkCompletedRecipes() {
+  let message = "";
+
+  // Normalize collected ingredients: trim and lowercase
+  const normalizedCollected = collected.map((i) => i.trim().toLowerCase());
+
   for (const [recipeName, requiredIngredients] of Object.entries(recipes)) {
-    const isComplete = requiredIngredients.every((ing) =>
-      collected.includes(ing)
+    // Normalize required ingredients for comparison
+    const normalizedRequired = requiredIngredients.map((i) =>
+      i.trim().toLowerCase()
+    );
+
+    const isComplete = normalizedRequired.every((ing) =>
+      normalizedCollected.includes(ing)
     );
     const alreadyCompleted = completedRecipes.includes(recipeName);
 
@@ -60,11 +67,15 @@ function checkCompletedRecipes() {
         "completedRecipes",
         JSON.stringify(completedRecipes)
       );
-      document.getElementById(
-        "saved"
-      ).innerText += `\n🎉 Congrats! You completed the recipe: ${recipeName}`;
+      message += `🎉 Congrats! You completed the recipe: ${recipeName}\n`;
     }
   }
+
+  if (!message) {
+    message = "No new recipes completed yet.";
+  }
+
+  document.getElementById("saved").innerText = message;
 }
 
 function rewardsHistory() {
