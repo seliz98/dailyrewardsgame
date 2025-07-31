@@ -75,7 +75,7 @@ function checkCompletedRecipes() {
     message = "No new recipes completed yet.";
   }
 
-  document.getElementById("saved").innerText = message;
+  document.getElementById("saved").innerText += `\n${message}`;
 }
 
 function rewardsHistory() {
